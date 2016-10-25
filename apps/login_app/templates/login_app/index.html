@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Login and Registration</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.min.js"></script>
+    <script type="text/javascript" charset="utf-8"></script>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'login_app/css/style.css' %}">
+  </head>
+  <body>
+    <h2>WELCOME!</h2>
+    <div id="wrapper">
+      <div class="message">
+        {% if messages %}
+            {% for message in messages %}
+                <li>{{message}}</li>
+            {% endfor %}
+        {% endif %}
+      </div>
+
+      <div class="register">
+        <h1>Register here please!</h1>
+        <form class="ui form" action="{% url 'login:register' %}" method="post">
+          {% csrf_token %}
+          Name: <input type="text" name="name" placeholder="Name">
+          Username: <input type="text" name="username" placeholder="Username">
+          Password: <input type="password" name="password" placeholder="Password">
+          Confirm Password: <input type="password" name="confirm" placeholder="Confirm Password">
+          Date Hired: <input type="date" name="hire_date">
+          <input type="submit" value="Register">
+        </form>
+      </div>
+
+      <div class="login">
+        <h1>Login here please!</h1>
+        <form class="ui form" action="{% url 'login:login' %}" method="post">
+          {% csrf_token %}
+          Username: <input type="text" name="username" placeholder="Username">
+          Password: <input type="password" name="password" placeholder="Password">
+          <input type="submit" value="Login">
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
