@@ -31,16 +31,12 @@ class UserManager(models.Manager):
         if same:
             errors.append('Username is already in use')
 
-        # blank = datetime.strptime(input['hire_date'], "%m-%d-%y")
-        # if not blank:
-        #     errors.append('Please enter the date hired')
-
-        # if not input['hire_date']:
-        #     errors.append('Please enter the date hired')
-
-        date = datetime.strptime(input['hire_date'], "%Y-%m-%d")
-        if datetime.today() <= date:
-            errors.append('Hire date cannot be after today')
+        if not input['hire_date']:
+            errors.append('Please enter the date hired')
+        else:
+            date = datetime.strptime(input['hire_date'], "%Y-%m-%d")
+            if datetime.today() <= date:
+                errors.append('Hire date cannot be after today')
 
         if len(errors) == 0:
             pwHash = bcrypt.hashpw(input['password'].encode(), bcrypt.gensalt().encode())
